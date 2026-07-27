@@ -6,30 +6,20 @@ The application uses a **Next.js** frontend, an **Express** REST API with **Sock
 
 ---
 
-## Tech stack
+## Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| Frontend | Next.js 16 | App Router, SSR/CSR UI |
-| Frontend | React 19 | Component UI |
-| Frontend | TypeScript | Typed frontend codebase |
-| Frontend | Tailwind CSS 4 | Styling and layout |
-| Frontend | Recharts | Dashboard and progress charts |
-| Frontend | Socket.io Client | Real-time notifications |
-| Frontend | Lucide React | Icons |
-| Frontend | Framer Motion | Motion / transitions |
-| Frontend | Radix UI | Accessible UI primitives |
-| Backend | Node.js | Runtime |
-| Backend | Express 5 | REST API |
-| Backend | MongoDB + Mongoose 8 | Database and ODM |
-| Backend | JWT + bcryptjs | Auth sessions and password hashing |
-| Backend | Socket.io | Real-time events |
-| Backend | Multer | File uploads |
-| Backend | pdf-parse / mammoth | PDF and DOCX text extraction |
-| AI | OpenRouter | Chat, summaries, quizzes, flashcards, mind maps, vision |
-| AI | Groq Whisper | Voice Tutor speech-to-text |
-| Auth | Google OAuth | Optional Google Sign-In |
-| Storage | Cloudinary | Optional cloud file storage |
+| Category | Technology |
+|----------|------------|
+| Frontend | Next.js 16, React 19, Tailwind CSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB + Mongoose |
+| Authentication | JWT |
+| Password Hashing | bcrypt |
+| Charts | Recharts |
+| HTTP Client | Fetch API |
+| Real-time | Socket.io |
+| AI | OpenRouter, Groq Whisper |
+| Storage | Cloudinary |
 
 ---
 
