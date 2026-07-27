@@ -1,4 +1,5 @@
 import { createServer } from "http";
+import dns from "dns";
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
@@ -19,6 +20,7 @@ import { uploadsDir } from "./services/storage.service.js";
 import { initSocket } from "./socket.js";
 import { startPlannerReminderJob } from "./services/planner-reminder.service.js";
 
+dns.setDefaultResultOrder("ipv4first");
 dotenv.config();
 
 const app = express();

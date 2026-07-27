@@ -136,7 +136,19 @@ export async function generateQuiz(req, res, next) {
       noteId: noteId || undefined,
       title: title || data.title || "AI Generated Quiz",
       difficulty,
-      questions: data.questions || [],
+      questions: (data.questions || []).map((q) => {
+        const type = ["mcq", "true_false", "short", "long"].includes(q.type) ? q.type : "short";
+        let options = Array.isArray(q.options) ? q.options.map((o) => String(o)) : [];
+        if (type === "mcq" && options.length > 1) {
+          options = [...options].sort(() => Math.random() - 0.5);
+        }
+        return {
+          type,
+          prompt: String(q.prompt || "").trim(),
+          options,
+          answer: String(q.answer || "").trim(),
+        };
+      }),
     });
 
     await logActivity(req.user.id, "Generated quiz", quiz.title);
@@ -156,14 +168,39 @@ export async function generateFlashcards(req, res, next) {
 
     const data = await generateStructuredJSON({
       context,
-      prompt: `Generate 12 flashcards. JSON shape: { "name": string, "cards": [{ "question": string, "answer": string, "difficulty": "easy"|"medium"|"hard" }] }`,
+      prompt: `Generate exactly 12 study flashcards from the notes.
+Return JSON with this exact shape:
+{"name":"Short set title","cards":[{"question":"...","answer":"...","difficulty":"easy"}]}
+Rules:
+- "cards" must be an array of 12 objects
+- each card needs question, answer, difficulty (easy|medium|hard)
+- keep answers concise`,
     });
+
+    const cards = Array.isArray(data.cards)
+      ? data.cards
+          .filter((c) => c && (c.question || c.answer))
+          .map((c) => ({
+            question: String(c.question || "").trim() || "Question",
+            answer: String(c.answer || "").trim() || "Answer",
+            difficulty: ["easy", "medium", "hard"].includes(String(c.difficulty))
+              ? String(c.difficulty)
+              : "medium",
+          }))
+      : [];
+
+    if (cards.length === 0) {
+      return res.status(422).json({
+        success: false,
+        message: "AI did not return usable flashcards. Try again.",
+      });
+    }
 
     const set = await FlashcardSet.create({
       userId: req.user.id,
       noteId: noteId || undefined,
       name: name || data.name || "AI Flashcards",
-      cards: data.cards || [],
+      cards,
     });
 
     await logActivity(req.user.id, "Generated flashcards", set.name);
