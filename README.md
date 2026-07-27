@@ -2,7 +2,34 @@
 
 StudyMind AI is a full-stack learning workspace for students. Upload course materials, chat with an AI tutor grounded in your notes, generate quizzes and flashcards, track progress, collaborate in study groups, and visualize topics with mind maps.
 
-The application uses a **Next.js** frontend, an **Express** REST API with **Socket.io** for real-time notifications, **MongoDB** for persistence, and **OpenRouter** for AI features.
+The application uses a **Next.js** frontend, an **Express** REST API with **Socket.io** for real-time notifications, **MongoDB** for persistence, and **OpenRouter** / **Groq** for AI features.
+
+---
+
+## Tech stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Frontend | Next.js 16 | App Router, SSR/CSR UI |
+| Frontend | React 19 | Component UI |
+| Frontend | TypeScript | Typed frontend codebase |
+| Frontend | Tailwind CSS 4 | Styling and layout |
+| Frontend | Recharts | Dashboard and progress charts |
+| Frontend | Socket.io Client | Real-time notifications |
+| Frontend | Lucide React | Icons |
+| Frontend | Framer Motion | Motion / transitions |
+| Frontend | Radix UI | Accessible UI primitives |
+| Backend | Node.js | Runtime |
+| Backend | Express 5 | REST API |
+| Backend | MongoDB + Mongoose 8 | Database and ODM |
+| Backend | JWT + bcryptjs | Auth sessions and password hashing |
+| Backend | Socket.io | Real-time events |
+| Backend | Multer | File uploads |
+| Backend | pdf-parse / mammoth | PDF and DOCX text extraction |
+| AI | OpenRouter | Chat, summaries, quizzes, flashcards, mind maps, vision |
+| AI | Groq Whisper | Voice Tutor speech-to-text |
+| Auth | Google OAuth | Optional Google Sign-In |
+| Storage | Cloudinary | Optional cloud file storage |
 
 ---
 
@@ -123,6 +150,7 @@ Open [http://localhost:3000](http://localhost:3000) — you will be redirected t
 | `OPENROUTER_MODEL` | Chat/completion model id |
 | `OPENROUTER_MAX_TOKENS` | Max tokens for AI responses |
 | `OPENROUTER_VISION_MODEL` | Model for vision/OCR-related calls when used |
+| `GROQ_API_KEY` | Groq API key for Voice Tutor transcription |
 | `GOOGLE_CLIENT_ID` | Google OAuth client ID (server-side verification) |
 | `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name (optional) |
 | `CLOUDINARY_API_KEY` | Cloudinary API key (optional) |
@@ -209,7 +237,7 @@ Restart the backend after changing socket or group controller code.
 
 ## Design notes
 
-- Dashboard: dark glass-style panels, violet/indigo accents, fixed sidebar with inset border, fixed top actions bar
+- Dashboard: dark glass-style panels, gold/charcoal accents, fixed sidebar with inset border, fixed top actions bar
 - Auth: light/dark-aware form tokens via `[data-auth-page]` and system `prefers-color-scheme`
 - Charts: Recharts on Dashboard and Progress pages
 
