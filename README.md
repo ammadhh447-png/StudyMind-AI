@@ -18,7 +18,7 @@ The application uses a **Next.js** frontend, an **Express** REST API with **Sock
 | Charts | Recharts |
 | HTTP Client | Fetch API |
 | Real-time | Socket.io |
-| AI | OpenRouter, Groq Whisper |
+| AI | LLM Integration |
 | Storage | Cloudinary |
 
 ---
